@@ -1,37 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PayMongo Setup for Next.js
 
-## Getting Started
+## 🚀 Introduction
 
-First, run the development server:
+This project integrates **PayMongo** into a **Next.js** application, allowing seamless online payments. PayMongo provides APIs for processing payments via credit/debit cards, and e-wallets.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📌 Features
+
+- **PayMongo API integration** for secure transactions.
+- **Supports multiple payment methods** (GCash, GrabPay, Paymaya, and Credit/Debit Cards).
+- **Server-side API routes** for handling transactions securely.
+- **Real-time payment status updates.**
+- **Next.js API route setup** to interact with PayMongo.
+
+## 📂 Project Structure
+
+```
+/paymongo-nextjs-setup
+│── /app
+│   ├── page.tsx          # Main UI with payment button
+│── /app
+│   ├── /api
+│   │   ├── /paymongo
+│   │   │   ├── route.ts   # API route for initiating payments
+│   │   ├── /webhook
+│   │   │   ├── route.ts   # API route for paymongo response
+│── /lib
+│   ├── createCheckoutSession.ts        # Helper functions for PayMongo API calls
+│── next.config.js         # Next.js configuration
+│── .env.local             # Environment variables
+│── package.json           # Project dependencies
+│── README.md              # Documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone this repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```sh
+   git clone https://github.com/Marwyn02/paymongo-nextjs-setup.git
+   cd paymongo-nextjs-setup
+   ```
 
-## Learn More
+2. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```sh
+   npm install  # or yarn install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```env
+   PAYMONGO_SECRET_KEY=your_secret_key
+   PAYMONGO_PUBLIC_KEY=your_public_key
+   ```
 
-## Deploy on Vercel
+   Replace `your_secret_key` and `your_public_key` with your actual **PayMongo API keys**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# paymongo-setup-nextjs
+   ```sh
+   npm run dev  # or yarn dev
+   ```
+
+   **⚠️ Important:** This setup requires the website to be **hosted online** for PayMongo API interactions to work properly. It will not function correctly in a local development environment without an internet-accessible server.
+
+## 🔧 Usage
+
+1. Open `http://localhost:3000` in your browser.
+2. Click on the **Pay Now** button.
+3. The system will generate a PayMongo payment link.
+4. Complete the payment using available payment methods.
+5. Upon success, you will be redirected to `/success`.
+6. If the payment fails, you will be redirected to `/failed`.
+
+## 🔗 API Endpoints
+
+### `POST /api/create-payment`
+
+- **Description:** Creates a PayMongo payment intent.
+- **Request Body:**
+  ```json
+  {
+    "amount": 100,
+    "currency": "PHP",
+    "paymentMethod": "gcash"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "checkoutUrl": "https://paymongo.com/checkout/..."
+  }
+  ```
+
+## 🛠 Technologies Used
+
+- **Next.js** (Frontend & API Routes)
+- **PayMongo API** (Payment Processing)
+- **TypeScript** (Type Safety)
+- **Tailwind CSS** (Styling, if applicable)
+
+## 🔥 Future Improvements
+
+- Implement **webhooks** for real-time payment status updates.
+- Add **database integration** for storing transaction history.
+- Enhance **error handling and user experience**.
+
+## 🤝 Contributing
+
+Feel free to **fork** this repo, make improvements, and submit a **pull request**! 🚀
+
+## 📝 License
+
+This project is open-source and available under the **MIT License**.
+
+---
+
+💡 **Need help?** Contact me at [jhunmarwynsumargo@gmail.com] or open an issue on GitHub!
